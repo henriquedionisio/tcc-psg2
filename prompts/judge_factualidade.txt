@@ -1,0 +1,15 @@
+Avalie a factualidade da resposta do assistente em uma escala de 1 a 5.
+
+Rubrica:
+5 - Totalmente precisa, sem erros factuais ou alucinações
+4 - Majoritariamente precisa, erros menores ou imprecisões leves
+3 - Parcialmente precisa, alguns erros factuais ou afirmações não verificáveis
+2 - Vários erros factuais ou alucinações significativas
+1 - Majoritariamente incorreta ou com alucinações graves
+
+Responda APENAS em JSON:
+{"score": <1-5>, "justification": "<breve justificativa>"}
+
+Objetivo da conversa: {objective}
+Pergunta do usuário: {user_message}
+Resposta do assistente: {assistant_message}

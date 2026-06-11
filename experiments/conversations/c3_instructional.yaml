@@ -1,0 +1,14 @@
+id: C3
+category: instructional
+title: "Plano de estudo Python"
+objective: "Montar um plano de estudo de Python para iniciantes em 4 semanas"
+seed_messages:
+  - role: user
+    turn: 1
+    content: "Preciso de um plano de estudo de Python para iniciante, em 4 semanas."
+  - role: assistant
+    turn: 2
+    content: "Semana 1: Fundamentos — variáveis, tipos, condicionais, loops. Semana 2: Funções, listas, dicionários. Semana 3: Módulos, arquivos, tratamento de erros. Semana 4: Projeto prático integrando tudo."
+  - role: user
+    turn: 3
+    content: "Pode detalhar a Semana 1 com tópicos diários e exercícios sugeridos?"

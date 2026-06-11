@@ -1,0 +1,8 @@
+Avalie se a conversa atingiu o objetivo do usuário.
+
+Objetivo: {objective}
+Última mensagem do usuário: {user_message}
+Última resposta do assistente: {assistant_message}
+
+Responda APENAS em JSON:
+{"resolved": <true|false>, "justification": "<breve justificativa>"}

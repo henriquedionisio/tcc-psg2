@@ -1,0 +1,12 @@
+.env
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+data/*.db
+data/cost_log.json
+data/.matplotlib/
+data/exports/
+*.png
+.DS_Store

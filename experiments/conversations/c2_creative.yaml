@@ -1,0 +1,14 @@
+id: C2
+category: creative
+title: "Conto de ficção científica"
+objective: "Desenvolver um conto de ficção científica em três atos com personagens e conflito"
+seed_messages:
+  - role: user
+    turn: 1
+    content: "Quero escrever um conto de ficção científica. Pode me ajudar a estruturar em três atos?"
+  - role: assistant
+    turn: 2
+    content: "Claro! Ato 1: Apresentação — estabeleça o mundo e o protagonista. Ato 2: Confronto — introduza o conflito central. Ato 3: Resolução — climax e desfecho. Qual cenário você imagina?"
+  - role: user
+    turn: 3
+    content: "Um cenário em que humanos descobrem que a Lua está se deslocando da órbita. Comece desenvolvendo o Ato 1."

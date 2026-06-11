@@ -1,0 +1,16 @@
+Compare a resposta do twin com a resposta de controle (baseline) e avalie a robustez/consistência em escala 1-5.
+
+Rubrica:
+5 - Essencialmente equivalente em conteúdo e qualidade
+4 - Pequenas diferenças de formulação, mesmo conteúdo central
+3 - Diferenças moderadas, mas mesma direção/conclusão
+2 - Diferenças significativas no conteúdo ou conclusão
+1 - Respostas substancialmente diferentes ou contraditórias
+
+Responda APENAS em JSON:
+{"score": <1-5>, "justification": "<breve justificativa>"}
+
+Objetivo: {objective}
+Pergunta: {user_message}
+Baseline: {baseline_message}
+Twin: {twin_message}
