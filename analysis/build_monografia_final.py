@@ -27,16 +27,16 @@ OUTPUT_PATH = ROOT / "docs" / "monografia" / "monografia-final.docx"
 FIGURE_COUNTER = 0
 
 TITULO = (
-    "Avaliação de Variabilidade em Large Language Models "
-    "por meio de Digital Twins Conversacionais"
+    "Avaliação de Variabilidade em Modelos de Linguagem de Grande Porte "
+    "por meio de Gêmeos Digitais Conversacionais"
 )
 AUTOR = "HENRIQUE COSTA DIONÍSIO"
 
 RESUMO_REF = (
-    "DIONÍSIO, Henrique Costa. Avaliação de Variabilidade em Large Language "
-    "Models por meio de Digital Twins Conversacionais. 2026. Monografia "
-    "(Bacharelado em Sistemas de Informação) – Escola de Artes, Ciências e "
-    "Humanidades, Universidade de São Paulo, São Paulo, 2026."
+    "DIONÍSIO, Henrique Costa. Avaliação de Variabilidade em Modelos de "
+    "Linguagem de Grande Porte por meio de Gêmeos Digitais Conversacionais. "
+    "2026. Monografia (Bacharelado em Sistemas de Informação) – Escola de Artes, "
+    "Ciências e Humanidades, Universidade de São Paulo, São Paulo, 2026."
 )
 
 RESUMO = (
@@ -204,7 +204,7 @@ def _insert_figure(doc: Document, image_path, caption: str) -> None:
     FIGURE_COUNTER += 1
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.add_run().add_picture(str(image_path), width=Cm(14))
+    p.add_run().add_picture(str(image_path), width=Cm(10.5))  # figuras compactas (norma EACH / espaço)
     cap = doc.add_paragraph()
     cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
     _add_formatted_run(cap, f"Figura {FIGURE_COUNTER} – {caption}")
@@ -329,6 +329,18 @@ def append_markdown_body(doc: Document, md_text: str) -> None:
 
     if in_table and table_buf:
         _add_table(doc, *_parse_table_block(table_buf))
+
+
+def set_normal_font(doc: Document, name: str = "Times New Roman", size: int = 12) -> None:
+    """Fixa o estilo Normal em Times New Roman 12, garantindo fonte consistente
+    no corpo, no resumo, nas listas e no sumário/índice (que herdam de Normal)."""
+    style = doc.styles["Normal"]
+    style.font.name = name
+    style.font.size = Pt(size)
+    rpr = style.element.get_or_add_rPr()
+    rfonts = rpr.get_or_add_rFonts()
+    for attr in ("w:ascii", "w:hAnsi", "w:eastAsia", "w:cs"):
+        rfonts.set(qn(attr), name)
 
 
 def set_text(p: Paragraph, text: str) -> None:
@@ -476,6 +488,9 @@ def trim_template_body(doc: Document) -> None:
 
 def main() -> None:
     doc = Document(str(TEMPLATE_PATH))
+
+    # Fonte consistente (corpo, resumo, listas e sumário) em Times New Roman 12
+    set_normal_font(doc)
 
     # Capa e folha de rosto
     replace_all_text(doc, "AUTOR DO TRABALHO", AUTOR)
