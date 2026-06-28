@@ -13,6 +13,7 @@ class MessageRole(str, Enum):
 
 class TwinType(str, Enum):
     CONTROL = "control"
+    CONTROL_REPLICATE = "control_replicate"
     PROMPT = "prompt"
     PARAMETER = "parameter"
 
@@ -30,6 +31,8 @@ class Conversation(SQLModel, table=True):
     category: ConversationCategory
     title: str
     objective: str
+    constraints: str = ""
+    difficulty: str = "simple"
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
     messages: List["Message"] = Relationship(back_populates="conversation")
@@ -65,6 +68,7 @@ class Twin(SQLModel, table=True):
     system_prompt_name: str = "baseline"
     system_prompt: str = ""
     resolved: bool = False
+    stopped_reason: Optional[str] = None
     total_turns: int = 0
     total_tokens: int = 0
     created_at: datetime = Field(default_factory=datetime.utcnow)
@@ -78,6 +82,7 @@ class ExperimentRun(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str
     config_path: str
+    replication_index: int = 1
     dry_run: bool = False
     status: str = "pending"
     total_api_calls: int = 0

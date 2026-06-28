@@ -1,0 +1,25 @@
+experiment:
+  name: "poc_v2_phase2"
+  fork_turns: [3, 6]
+  replications: 5
+
+limits:
+  max_turns_post_fork: 8
+  max_tokens_per_response: 400
+  max_history_messages: 10
+  judge_sample_rate: 0.5
+  stop_on_user_intent: true
+  include_control_replicate: true
+  human_review_sample_rate: 0.10
+
+conversations:
+  # Simples (originais, seeds até turno 6)
+  - path: experiments/conversations/c1_factual.yaml
+  - path: experiments/conversations/c2_creative.yaml
+  - path: experiments/conversations/c3_instructional.yaml
+  - path: experiments/conversations/c4_contextual.yaml
+  # Complexos (restrições explícitas)
+  - path: experiments/conversations/c1b_factual_photosynthesis.yaml
+  - path: experiments/conversations/c2b_creative_no_male.yaml
+  - path: experiments/conversations/c3b_instructional_dataviz.yaml
+  - path: experiments/conversations/c4b_contextual_brazil_history.yaml

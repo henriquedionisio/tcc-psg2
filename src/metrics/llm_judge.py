@@ -1,28 +1,25 @@
 from __future__ import annotations
 
-import json
-
 from src.metrics.base import BaseMetric, EvaluatedMetric, MetricContext
+from src.metrics.judge_parse import parse_judge_content
 from src.services.llm import LLMService, load_prompt
 
 
 def _parse_judge_response(content: str, metric_name: str) -> EvaluatedMetric:
-    try:
-        data = json.loads(content)
-        score = float(data.get("score", 0))
+    score, details = parse_judge_content(content)
+    if score is not None:
         return EvaluatedMetric(
             metric_name=metric_name,
             score=score,
             value=str(score),
-            details=data.get("justification", content),
+            details=details or content,
         )
-    except (json.JSONDecodeError, TypeError, ValueError):
-        return EvaluatedMetric(
-            metric_name=metric_name,
-            score=None,
-            value=None,
-            details=content,
-        )
+    return EvaluatedMetric(
+        metric_name=metric_name,
+        score=None,
+        value=None,
+        details=details or content,
+    )
 
 
 class FactualidadeMetric(BaseMetric):

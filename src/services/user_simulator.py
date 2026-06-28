@@ -14,10 +14,13 @@ class UserSimulator:
         objective: str,
         category: ConversationCategory,
         history: list[Message],
+        constraints: str = "",
     ) -> str:
+        constraints_text = constraints.strip() if constraints else "Nenhuma restrição adicional."
         system_prompt = self.template.format(
             objective=objective,
             category=category.value,
+            constraints=constraints_text,
         )
         messages = [
             {"role": msg.role.value, "content": msg.content}
@@ -35,7 +38,7 @@ class UserSimulator:
 
     def is_conversation_resolved(self, message: str) -> bool:
         lower = message.lower()
-        resolution_signals = [
+        stop_signals = [
             "obrigado",
             "resolve minha dúvida",
             "resolveu",
@@ -44,5 +47,13 @@ class UserSimulator:
             "era isso",
             "muito obrigado",
             "thanks",
+            "encerrar",
+            "pode parar",
+            "é suficiente",
+            "já entendi",
+            "[stop]",
         ]
-        return any(signal in lower for signal in resolution_signals)
+        return any(signal in lower for signal in stop_signals)
+
+    def should_stop(self, message: str) -> bool:
+        return self.is_conversation_resolved(message)

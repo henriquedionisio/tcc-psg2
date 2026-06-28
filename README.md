@@ -47,11 +47,43 @@ python -m src.cli run-experiment experiments/poc_config.yaml --dry-run
 python -m src.cli run-experiment experiments/poc_config.yaml
 ```
 
+### Rodar POC v2 (controle A/B + divergência atribuível)
+
+```bash
+# Recomendado: banco limpo para seeds corretas
+rm -f data/tcc.db
+
+# Teste reduzido
+python -m src.cli run-experiment experiments/poc_v2_config.yaml --dry-run
+
+# Execução completa — Fase 2 (8 conversas, 5 replicações, fork 3 e 6)
+python -m src.cli run-experiment experiments/poc_v2_config.yaml
+
+# Exportar resultados e amostra para revisão humana (~10%)
+python -m src.cli export-results
+python -m src.cli export-human-review --all-replications --sample-rate 0.10
+python analysis/generate_report.py
+```
+
+A v2 adiciona **control_b** (réplica idêntica de **control_a**) para estimar ruído
+intrínseco e calcula **divergência atribuível** = divergência total − ruído A/B.
+
+**Fase 2:** 8 diálogos (4 simples + 4 com restrições), seeds até turno 6,
+12 turnos pós-fork, 5 replicações, export `human_review_sample_*.csv`.
+
 ### Exportar resultados e gerar gráficos
 
 ```bash
 python -m src.cli export-results
 python analysis/generate_report.py
+```
+
+### Gerar a monografia (.docx)
+
+```bash
+# Gráficos usados na monografia + documento final no template EACH
+python analysis/generate_monografia_charts.py
+python analysis/build_monografia_final.py   # gera docs/monografia/monografia-final.docx
 ```
 
 ## Estrutura
@@ -61,13 +93,14 @@ python analysis/generate_report.py
 - `experiments/` — Conversas seed e configuração da POC
 - `data/` — Banco SQLite, exports e log de custos
 - `analysis/` — Scripts de análise e gráficos
-- `monografia/` — Texto do TCC
+- `docs/` — Documentação do TCC: monografia (`docs/monografia/`), relatórios (`docs/relatorios/`), plano de atividades e relatório de andamento
 
 ## Experimento POC
 
 - 4 conversas (factual, criativa, instrucional, contextual)
 - 2 pontos de fork por conversa (turnos 3 e 6)
-- 8 twins por fork: 1 controle + 3 prompt + 4 parâmetros
+- 9 twins por fork (v2): 1 controle A + 1 réplica B + 3 prompt + 4 parâmetros
+- 8 twins por fork (v1): sem réplica B (`include_control_replicate: false`)
 - Métricas: tokens, turnos, resolução, LLM-as-Judge
 
 ## Orçamento

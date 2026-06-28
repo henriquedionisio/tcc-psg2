@@ -1,0 +1,29 @@
+id: C4B
+category: contextual
+title: "História do Brasil — independência e Primeiro Reinado"
+objective: "Obter explicação institucional e factual sobre o processo de independência do Brasil e o Primeiro Reinado"
+difficulty: complex
+constraints:
+  - "Manter tom institucional e neutro"
+  - "NÃO fazer apologia política ou partidária"
+  - "Citar datas e personagens históricos verificáveis"
+  - "Diferenciar fatos históricos de interpretações historiográficas"
+seed_messages:
+  - role: user
+    turn: 1
+    content: "Preciso de material para aula: como se deu o processo de independência do Brasil?"
+  - role: assistant
+    turn: 2
+    content: "Em 7 de setembro de 1822, Dom Pedro I proclamou a independência às margens do Ipiranga, formalizando ruptura com Portugal. O processo envolveu negociações com cortes lusas, mobilização de elites brasileiras e reconhecimento internacional gradual até 1825."
+  - role: user
+    turn: 3
+    content: "E o período do Primeiro Reinado? Quais eventos devo destacar?"
+  - role: assistant
+    turn: 4
+    content: "Primeiro Reinado (1822–1831): elaboração da Constituição de 1824, conflitos com assembleias provinciais, Guerra da Cisplatina e tensões com partido liberal. Em 1831, Dom Pedro I abdicou e retornou a Portugal, abrindo o período regencial."
+  - role: user
+    turn: 5
+    content: "Como explicar a abolição gradual sem simplificar demais?"
+  - role: assistant
+    turn: 6
+    content: "A abolição foi processo longo: Lei do Ventre Livre (1871), Lei dos Sexagenários (1885) e Lei Áurea (1888). Historicamente, combina pressão abolicionista, mudanças econômicas e negociações políticas — evite reduzir a um único fator ou herói isolado."

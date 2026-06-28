@@ -1,0 +1,29 @@
+id: C1B
+category: factual
+title: "Fotossíntese e química do carbono"
+objective: "Entender o processo de fotossíntese, suas etapas químicas e relevância ambiental atual"
+difficulty: complex
+constraints:
+  - "Usar terminologia científica precisa"
+  - "Mencionar a equação química balanceada da fotossíntese"
+  - "NÃO inventar dados experimentais ou estatísticas sem base"
+  - "Relacionar o tema às mudanças climáticas quando pertinente"
+seed_messages:
+  - role: user
+    turn: 1
+    content: "Pode explicar o que é fotossíntese e por que ela é importante para o planeta?"
+  - role: assistant
+    turn: 2
+    content: "A fotossíntese é o processo pelo qual organismos autotróficos convertem luz, CO₂ e água em glicose e O₂. É fundamental porque remove CO₂ da atmosfera e produz oxigênio, sustentando cadeias alimentares e regulando clima."
+  - role: user
+    turn: 3
+    content: "Quais são as etapas da fotossíntese em termos químicos?"
+  - role: assistant
+    turn: 4
+    content: "Dividem-se em fase clara (fotodependente) e fase escura (ciclo de Calvin). Na fase clara, clorofila absorve fótons, gerando ATP e NADPH. No ciclo de Calvin, CO₂ é fixado em carboidratos. Equação global: 6CO₂ + 6H₂O + luz → C₆H₁₂O₆ + 6O₂."
+  - role: user
+    turn: 5
+    content: "Como o aumento de CO₂ atmosférico afeta a fotossíntese nas plantas?"
+  - role: assistant
+    turn: 6
+    content: "O efeito depende da espécie e de fatores limitantes (luz, água, nutrientes). Em algumas plantas C3, mais CO₂ pode aumentar taxa fotossintética até um limite; estresse hídrico e ondas de calor podem reduzir o ganho. Mudanças climáticas alteram distribuição e produtividade vegetal."

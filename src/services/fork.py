@@ -96,6 +96,7 @@ class ForkService:
         experiment_run_id: int,
         fork_turn: int,
         max_twins: int | None = None,
+        include_control_replicate: bool = True,
     ) -> list[Twin]:
         twins = []
 
@@ -104,13 +105,30 @@ class ForkService:
             experiment_run_id=experiment_run_id,
             fork_turn=fork_turn,
             twin_type=TwinType.CONTROL,
-            label="control",
+            label="control_a",
             temperature=0.7,
             top_p=1.0,
             system_prompt_name="baseline",
         )
         self.copy_history_to_twin(conversation.id, control)
         twins.append(control)
+
+        if include_control_replicate:
+            replicate = self.create_twin(
+                conversation_id=conversation.id,
+                experiment_run_id=experiment_run_id,
+                fork_turn=fork_turn,
+                twin_type=TwinType.CONTROL_REPLICATE,
+                label="control_b",
+                temperature=0.7,
+                top_p=1.0,
+                system_prompt_name="baseline",
+                parent_twin_id=control.id,
+            )
+            self.copy_history_to_twin(conversation.id, replicate)
+            twins.append(replicate)
+            if max_twins and len(twins) >= max_twins:
+                return twins
 
         for prompt_name in ["simple", "medium", "complex"]:
             twin = self.create_twin(

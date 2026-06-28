@@ -2,6 +2,7 @@ id: C3
 category: instructional
 title: "Plano de estudo Python"
 objective: "Montar um plano de estudo de Python para iniciantes em 4 semanas"
+difficulty: simple
 seed_messages:
   - role: user
     turn: 1
@@ -12,3 +13,12 @@ seed_messages:
   - role: user
     turn: 3
     content: "Pode detalhar a Semana 1 com tópicos diários e exercícios sugeridos?"
+  - role: assistant
+    turn: 4
+    content: "Semana 1 — Dia 1: instalação e print/variáveis. Dia 2: tipos e conversões. Dia 3: if/else. Dia 4: for/while. Dia 5: revisão + mini-projeto calculadora. Exercícios: 5 desafios diários no HackerRank ou Exercism."
+  - role: user
+    turn: 5
+    content: "E a Semana 2? Quero exercícios práticos também."
+  - role: assistant
+    turn: 6
+    content: "Semana 2 — funções (Dia 1-2), listas (Dia 3), dicionários (Dia 4), revisão (Dia 5). Exercícios: manipular listas de notas, contar palavras em texto, simular agenda de contatos com dicionário."

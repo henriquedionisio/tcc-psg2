@@ -1,0 +1,29 @@
+id: C3B
+category: instructional
+title: "Tutorial de visualização de dados em Python"
+objective: "Aprender a criar gráficos com matplotlib seguindo boas práticas, em 3 módulos progressivos"
+difficulty: complex
+constraints:
+  - "Usar apenas matplotlib (sem seaborn ou plotly)"
+  - "NÃO pular etapas de instalação e importação"
+  - "Incluir exemplos de código executáveis em cada módulo"
+  - "Alertar sobre erros comuns de iniciantes"
+seed_messages:
+  - role: user
+    turn: 1
+    content: "Quero aprender visualização de dados em Python do zero. Por onde começo?"
+  - role: assistant
+    turn: 2
+    content: "Módulo 1: instale matplotlib (`pip install matplotlib`), importe `pyplot`, crie gráfico de linha simples com listas x/y, adicione título e rótulos de eixos. Erro comum: esquecer `plt.show()` em scripts locais."
+  - role: user
+    turn: 3
+    content: "Pode detalhar o Módulo 1 com um exemplo completo?"
+  - role: assistant
+    turn: 4
+    content: "```python\nimport matplotlib.pyplot as plt\nmeses = ['Jan','Fev','Mar']\nvendas = [10, 14, 9]\nplt.plot(meses, vendas, marker='o')\nplt.title('Vendas trimestrais')\nplt.xlabel('Mês')\nplt.ylabel('Unidades')\nplt.show()\n```\nErro comum: eixos sem rótulo dificultam interpretação."
+  - role: user
+    turn: 5
+    content: "E o Módulo 2? Quero gráficos de barras e histogramas."
+  - role: assistant
+    turn: 6
+    content: "Módulo 2: `plt.bar` para categorias, `plt.hist` para distribuições. Defina `bins` no histograma e rotacione rótulos longos com `plt.xticks(rotation=45)`. Erro comum: usar barra sem ordenar categorias quando a ordem importa."

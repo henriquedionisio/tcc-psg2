@@ -5,7 +5,7 @@ from __future__ import annotations
 import random
 from datetime import datetime
 
-from sqlmodel import Session
+from sqlmodel import Session, select
 
 from src.models.entities import (
     Conversation,
@@ -44,7 +44,10 @@ def seed_mock_experiment(session: Session) -> ExperimentRun:
     ]
 
     fork_turns = [3, 6]
-    twin_defs: list[dict] = [{"type": TwinType.CONTROL, "label": "control", "prompt": "baseline", "temp": 0.7, "top_p": 1.0}]
+    twin_defs: list[dict] = [
+        {"type": TwinType.CONTROL, "label": "control_a", "prompt": "baseline", "temp": 0.7, "top_p": 1.0},
+        {"type": TwinType.CONTROL_REPLICATE, "label": "control_b", "prompt": "baseline", "temp": 0.7, "top_p": 1.0},
+    ]
     for p in ["simple", "medium", "complex"]:
         twin_defs.append({"type": TwinType.PROMPT, "label": f"prompt_{p}", "prompt": p, "temp": 0.7, "top_p": 1.0})
     for combo in PARAM_COMBINATIONS:
@@ -57,24 +60,28 @@ def seed_mock_experiment(session: Session) -> ExperimentRun:
         })
 
     for ext_id, category, title, objective in conversations_data:
-        conv = Conversation(
-            external_id=ext_id,
-            category=category,
-            title=title,
-            objective=objective,
-        )
-        session.add(conv)
-        session.commit()
-        session.refresh(conv)
+        conv = session.exec(
+            select(Conversation).where(Conversation.external_id == ext_id)
+        ).first()
+        if not conv:
+            conv = Conversation(
+                external_id=ext_id,
+                category=category,
+                title=title,
+                objective=objective,
+            )
+            session.add(conv)
+            session.commit()
+            session.refresh(conv)
 
-        for turn in range(1, 4):
-            session.add(Message(
-                conversation_id=conv.id,
-                role=MessageRole.USER if turn % 2 == 1 else MessageRole.ASSISTANT,
-                content=f"Mensagem seed {turn} da conversa {ext_id}",
-                turn_number=turn,
-            ))
-        session.commit()
+            for turn in range(1, 4):
+                session.add(Message(
+                    conversation_id=conv.id,
+                    role=MessageRole.USER if turn % 2 == 1 else MessageRole.ASSISTANT,
+                    content=f"Mensagem seed {turn} da conversa {ext_id}",
+                    turn_number=turn,
+                ))
+            session.commit()
 
         for fork_turn in fork_turns:
             for tdef in twin_defs:
@@ -119,6 +126,20 @@ def seed_mock_experiment(session: Session) -> ExperimentRun:
                 ]
                 if category in (ConversationCategory.CONTEXTUAL, ConversationCategory.INSTRUCTIONAL):
                     metrics.append(("adequacao_institucional", round(3.8 + random.uniform(-0.5, 0.5), 2), None))
+                if tdef["type"] == TwinType.CONTROL_REPLICATE:
+                    metrics.append((
+                        "intrinsic_divergence_pct",
+                        round(random.uniform(5.0, 25.0), 1),
+                        None,
+                    ))
+                if tdef["type"] in (TwinType.PROMPT, TwinType.PARAMETER):
+                    intrinsic = random.uniform(5.0, 25.0)
+                    total = random.uniform(intrinsic, 60.0)
+                    metrics.append((
+                        "attributed_divergence_pct",
+                        round(max(0.0, total - intrinsic), 1),
+                        None,
+                    ))
 
                 for name, score, value in metrics:
                     session.add(MetricResult(

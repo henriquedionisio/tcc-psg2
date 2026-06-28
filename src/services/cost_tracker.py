@@ -17,6 +17,11 @@ class CostTracker:
         COST_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
         EXPORTS_DIR.mkdir(parents=True, exist_ok=True)
 
+    def reset(self) -> None:
+        self.total_prompt_tokens = 0
+        self.total_completion_tokens = 0
+        self.api_calls = 0
+
     def record(self, prompt_tokens: int, completion_tokens: int) -> None:
         self.total_prompt_tokens += prompt_tokens
         self.total_completion_tokens += completion_tokens

@@ -6,6 +6,7 @@ limits:
   max_turns_post_fork: 5
   max_tokens_per_response: 500
   judge_sample_rate: 0.5
+  include_control_replicate: false
 
 conversations:
   - path: experiments/conversations/c1_factual.yaml

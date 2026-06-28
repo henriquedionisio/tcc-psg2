@@ -2,6 +2,7 @@ id: C2
 category: creative
 title: "Conto de ficção científica"
 objective: "Desenvolver um conto de ficção científica em três atos com personagens e conflito"
+difficulty: simple
 seed_messages:
   - role: user
     turn: 1
@@ -12,3 +13,12 @@ seed_messages:
   - role: user
     turn: 3
     content: "Um cenário em que humanos descobrem que a Lua está se deslocando da órbita. Comece desenvolvendo o Ato 1."
+  - role: assistant
+    turn: 4
+    content: "Ato 1: Em 2087, a engenheira orbital Mira Kato detecta anomalias gravitationais na Lua. Equipes confirmam: a órbita está se expandindo lentamente. Mira alerta a agência espacial, mas enfrenta ceticismo político enquanto marés começam a mudar."
+  - role: user
+    turn: 5
+    content: "Agora desenvolva o Ato 2 com o conflito central."
+  - role: assistant
+    turn: 6
+    content: "Ato 2: Mira lidera missão para investigar cavernas lunares com assinatura energética desconhecida. A equipe descobre estruturas antigas que parecem deslocar a massa lunar. O conflito surge entre salvar a Terra e preservar evidências científicas antes de uma intervenção militar."

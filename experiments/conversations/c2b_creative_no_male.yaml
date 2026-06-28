@@ -1,0 +1,29 @@
+id: C2B
+category: creative
+title: "Conto histórico sem figuras masculinas"
+objective: "Criar um conto ambientado no Brasil colonial com protagonistas femininas e conflito político"
+difficulty: complex
+constraints:
+  - "NÃO usar personagens masculinos na narrativa"
+  - "Ambiente: Brasil colonial (século XVIII)"
+  - "Incluir conflito entre comunidade e autoridade colonial"
+  - "Manter tom literário, não didático"
+seed_messages:
+  - role: user
+    turn: 1
+    content: "Quero um conto ambientado no Brasil colonial. Pode sugerir uma premissa com protagonista feminina?"
+  - role: assistant
+    turn: 2
+    content: "Premissa: Em 1742, na vila de Paraty, a curandeira Izabel organiza mulheres mercadoras contra taxas abusivas impostas pela câmara colonial. A história explora alianças secretas, resistência econômica e tradições de cura transmitidas entre gerações."
+  - role: user
+    turn: 3
+    content: "Desenvolva o primeiro ato apresentando Izabel e o conflito inicial."
+  - role: assistant
+    turn: 4
+    content: "Ato 1: Izabel reúne pescadoras e tecelãs no beco das Dores. Novas taxas ameaçam fechar o mercado informal onde elas sustentam suas famílias. Uma inspetora colonial chega com guardas para cobrar o imposto — Izabel propõe greve de mercadorias e diário de testemunhos."
+  - role: user
+    turn: 5
+    content: "Agora o segundo ato, com escalada do conflito."
+  - role: assistant
+    turn: 6
+    content: "Ato 2: A greve espalha-se, mas a câmara retalia confiscando mercadorias. Izabel descobre que uma oficial colonial local simpatiza com as mulheres e pode vazar documentos sobre corrupção. O conflito pessoal surge quando a filha adotiva de Izabel é presa por desacato."

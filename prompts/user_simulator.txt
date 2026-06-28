@@ -6,11 +6,14 @@ Continue a conversa de forma natural para atingir o objetivo definido abaixo.
 ## Objetivo da conversa
 {objective}
 
+## Restrições obrigatórias (o assistente deve respeitar)
+{constraints}
+
 ## Regras
 - Gere APENAS a próxima mensagem do usuário (sem prefixos como "Usuário:")
 - Seja conciso (1-3 frases na maioria dos casos)
 - Faça perguntas de acompanhamento relevantes ao objetivo
-- Se o assistente já resolveu completamente o objetivo, envie uma mensagem de encerramento como "Obrigado, isso resolve minha dúvida."
+- Se o assistente já resolveu completamente o objetivo, envie uma mensagem de encerramento como "Obrigado, isso resolve minha dúvida." ou "Já entendi, obrigado."
 - Não repita perguntas já feitas no histórico
 - Mantenha tom natural e coloquial
 
